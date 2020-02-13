@@ -29,7 +29,16 @@ export default {
     data () {
         return {
             formData: {
-                // 提交数据
+                // 手机号
+                phoneNumber: '',
+                // 密码
+                password: '',
+                // 确认密码
+                confirmPassword: '',
+                // 图片验证码
+                imgCode: '',
+                // 短信验证码
+                smsCode: ''   
             }
         }
     },
@@ -91,7 +100,20 @@ export default {
             }
         },
         // 提交注册
-        dataSubmit () {}
+        dataSubmit () {
+            this.$refs['dataForm'].validate(valid => {
+                if (!valid) return
+                register(this.formData)
+                    .then(({ data }) => {
+                        if (data.code === 0) {
+                            // 注册成功后是否直接变为已登录状态 ？
+                            // TODO 保存登录信息 / 重定向至指定页面
+                        } else {
+                            this.$message.error(data.message)
+                        }
+                    })
+            })
+        }
     },
     // 检查是否有未结束的倒计时
     activated () {

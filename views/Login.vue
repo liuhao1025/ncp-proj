@@ -15,3 +15,25 @@
         </div>
     </div>
 </template>
+<script>
+import { login, getImgCode } from '@/apis/login'
+
+export default {
+    data () {
+        return {
+            formData: {
+                phoneNumber: '',
+                password: '',
+                imgCode: ''
+            }
+        }
+    },
+    methods: {
+        // TODO 登录成功后保存获取到的 token
+        login () {
+            login(this.formData)
+                
+        }
+    }
+}
+</script>
